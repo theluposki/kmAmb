@@ -1,7 +1,7 @@
 <template>
   <div class="container-login">
     <div class="logo">
-      <img src="@/assets/img/logoAmb.png" alt="logo" />
+      <img src="@/assets/logo.png" alt="logo" />
     </div>
     <div class="form">
       <input type="text" placeholder="Digite seu email" />
@@ -65,6 +65,7 @@
   border: solid 1px var(--bg-placeholder);
   border-radius: 3px;
   margin-right: 5px;
+  margin-top: 10px;
   align-self: flex-end;
   font-weight: 500;
 }

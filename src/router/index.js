@@ -3,8 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
-
+import Admin from '../views/Admin.vue'
 
 Vue.use(VueRouter)
 
@@ -25,10 +24,10 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
-  },
+    path: '/admin',
+    name: 'Admin',
+    component: Admin
+  }
 ]
 
 const router = new VueRouter({
