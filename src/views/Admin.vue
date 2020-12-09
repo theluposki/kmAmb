@@ -4,8 +4,8 @@
     <div class="container-admin">
       <aside class="aside">
         <ul class="list-group">
-          <li @click="activeList" class="list-group-item">Lista</li>
-          <li @click="activeUsers" class="list-group-item">Users</li>
+          <li @click="activeList" class="list-group-item">Últimos Serviços</li>
+          <li @click="activeUsers" class="list-group-item">Usuários</li>
         </ul>
       </aside>
       <section class="section">

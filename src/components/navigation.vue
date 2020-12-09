@@ -5,7 +5,7 @@
     </router-link>
     <div>
     <div class="info-user">
-      <span>{{ nameUser }}</span>
+      <span>{{ user.nome }}</span>
     </div>
     </div>
   </nav>
@@ -15,8 +15,11 @@
 export default {
   data(){
     return {
-      nameUser: 'Lucas Pereira de Oliveira'
+      user: [],
     }
+  },
+  created() {
+    this.user = JSON.parse(localStorage.getItem('currentUser'))
   }
 }
 </script>

@@ -4,12 +4,57 @@
       <img src="@/assets/logo.png" alt="logo" />
     </div>
     <div class="form">
-      <input type="text" placeholder="Digite seu email" />
-      <input type="text" placeholder="Digite sua senha" />
-      <button>Acessar</button>
+      <input v-model="email" type="text" placeholder="Digite seu email" />
+      <input v-model="password" type="password" placeholder="Digite sua senha" />
+      <button @click="logar()">Acessar</button>
+      <div class="message-error">{{ message }}</div>
     </div>
   </div>
 </template>
+
+<script>
+import Api from '../js/api'
+
+export default {
+  data(){
+    return {
+      email: '',
+      password: '',
+      message: '',
+    }
+  },
+  methods: {
+    async logar(){
+      const response = await Api.post('/user/auth', {
+        email: this.email,
+        password: this.password
+      })
+
+      let user = response.data.user
+
+      if(user.error){
+        this.message = user.error
+        return console.log(user.error)
+      }
+      if(user.user){
+         let currentUser = user.user 
+         localStorage.setItem('token', user.token)
+         localStorage.setItem('currentUser', JSON.stringify({ id: currentUser._id, nome: currentUser.nome, cnh: currentUser.cnh, vencimentoCnh: currentUser.vencimentoCnh, matricula: currentUser.matricula }))
+         
+         if(currentUser.roles.includes('admin')){
+           this.$router.push('/admin')
+         }
+
+         if(currentUser.roles.includes('user')){
+           this.$router.push('/')
+         }
+         
+         return console.log(user)
+      }
+    }
+  }
+}
+</script>
 
 <style scoped>
 .container-login {
@@ -76,5 +121,10 @@
 
   transition: border ease-in-out 0.4s;
   border: solid 1px var(--bg-light);
+}
+
+.message-error {
+  padding-top: 40px;
+  font-weight: 500;
 }
 </style>

@@ -125,9 +125,15 @@
   border-bottom: solid 1px var(--bg-light);
   padding: 0px 15px;
 }
-.table > tbody td:hover {
+
+.table > tbody tr:hover {
   box-shadow: 1px 3px 5px var(--bg-placeholder);
   transition: box-shadow ease-in-out 0.3s;
+}
+
+.table > tbody td:hover {
+  box-shadow: 1px 3px 5px var(--bg-placeholder);
+  transition: box-shadow ease 0.2s;
   background: var(--bg-light);
 }
 </style>
