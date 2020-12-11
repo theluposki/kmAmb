@@ -99,6 +99,7 @@ export default {
   background: var(--bg-light);
   padding: 0px 10px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 700;
+  text-transform: capitalize;
 }
 </style>

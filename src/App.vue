@@ -16,7 +16,6 @@
   padding: 0;
   box-sizing: border-box;
   outline: none;
-  background: var(--bg-primary);
   font-family: 'Roboto', sans-serif;
   color: var(--font-primary);
 }
@@ -24,5 +23,6 @@
 .container {
   width: 100vw;
   height: 100vh;
+  background: var(--bg-primary);
 }
 </style>
