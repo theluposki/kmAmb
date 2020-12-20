@@ -5,7 +5,11 @@
     </div>
     <div class="form">
       <input v-model="email" type="text" placeholder="Digite seu email" />
-      <input v-model="password" type="password" placeholder="Digite sua senha" />
+      <input
+        v-model="password"
+        type="password"
+        placeholder="Digite sua senha"
+      />
       <button @click="logar()">Acessar</button>
       <div class="message-error">{{ message }}</div>
     </div>
@@ -13,47 +17,83 @@
 </template>
 
 <script>
-import Api from '../js/api'
+import Api from "../js/api";
 
 export default {
-  data(){
+  data() {
     return {
-      email: '',
-      password: '',
-      message: '',
-    }
+      email: "",
+      password: "",
+      message: "",
+    };
   },
   methods: {
-    async logar(){
-      const response = await Api.post('/user/auth', {
+    async logar() {
+      localStorage.setItem("token", '');
+      localStorage.setItem("currentUser", '')
+      const response = await Api.post("/user/auth", {
         email: this.email,
-        password: this.password
-      })
+        password: this.password,
+      });
 
-      let user = response.data.user
+      let user = response.data.user;
 
-      if(user.error){
-        this.message = user.error
-        return console.log(user.error)
+      if (user.error) {
+        this.message = user.error;
+        return console.log(user.error);
       }
-      if(user.user){
-         let currentUser = user.user 
-         localStorage.setItem('token', user.token)
-         localStorage.setItem('currentUser', JSON.stringify({ id: currentUser._id, nome: currentUser.nome, cnh: currentUser.cnh, vencimentoCnh: currentUser.vencimentoCnh, matricula: currentUser.matricula }))
-         
-         if(currentUser.roles.includes('admin')){
-           this.$router.push('/admin')
-         }
+      if (user.user) {
+        let currentUser = user.user;
+        localStorage.setItem("token", user.token);
+        localStorage.setItem(
+          "currentUser",
+          JSON.stringify({
+            id: currentUser._id,
+            nome: currentUser.nome,
+            cnh: currentUser.cnh,
+            vencimentoCnh: currentUser.vencimentoCnh,
+            matricula: currentUser.matricula,
+            roles: currentUser.roles
+          })
+        );
 
-         if(currentUser.roles.includes('user')){
-           this.$router.push('/')
-         }
-         
-         return console.log(user)
+        if (currentUser.roles.includes("admin")) {
+          localStorage.setItem("token", user.token);
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({
+              id: currentUser._id,
+              nome: currentUser.nome,
+              cnh: currentUser.cnh,
+              vencimentoCnh: currentUser.vencimentoCnh,
+              matricula: currentUser.matricula,
+              roles: currentUser.roles
+            })
+          );
+          this.$router.push("/admin");
+        }
+
+        if (currentUser.roles.includes("user")) {
+          localStorage.setItem("token", user.token);
+          localStorage.setItem(
+            "currentUser",
+            JSON.stringify({
+              id: currentUser._id,
+              nome: currentUser.nome,
+              cnh: currentUser.cnh,
+              vencimentoCnh: currentUser.vencimentoCnh,
+              matricula: currentUser.matricula,
+              roles: currentUser.roles
+            })
+          );
+          this.$router.push("/home");
+        }
+
+        return console.log(user);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

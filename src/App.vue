@@ -18,6 +18,7 @@
   outline: none;
   font-family: 'Roboto', sans-serif;
   color: var(--font-primary);
+  background: #0b1015;
 }
 
 .container {

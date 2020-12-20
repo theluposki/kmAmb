@@ -53,6 +53,7 @@ export default {
   --bg-placeholder: #577ea6;
   --font-primary: #f2f5f8;
 
+  background: #0b1015;
   display: flex;
   justify-content: flex-start;
   align-items: center;

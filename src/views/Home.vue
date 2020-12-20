@@ -136,13 +136,9 @@
 
 <script>
 import navigation from "../components/navigation";
-import { saveLocalDb } from '../js/dbLocal'
-const Motorista = {
-  nome: 'Jailson da Silva',
-  cnh: '154681265465',
-  matricula: '351',
-  dataRegistro: '12/04/2018',
-}
+import { saveLocalDb, getAllServices, clearServicesLocal } from '../js/dbLocal'
+import Api from "../js/api";
+const motorista = JSON.parse(localStorage.getItem('currentUser'))
 
 export default {
   components: {
@@ -164,33 +160,106 @@ export default {
       mensagemSucesso: ''
     };
   },
-  created() {
+  async created() {
     this.getDataLocal();
+
+    if(navigator.onLine){
+      await this.syncMongoDb()
+    } else {
+      console.log('offline')
+    }
+
+    window.addEventListener('online',  async () => {
+      await this.syncMongoDb()
+    });
   },
   methods: {
+    async syncMongoDb(){
+        const arr = await getAllServices()
+        await this.saveMongo(arr)
+    },
+    async saveMongo(arr){
+        await arr.forEach(async item => {
+            const response = await Api.post(`/controlKM`, {
+              hrEmitido: item.hrEmitido,
+              dtEmitido: item.dtEmitido,
+
+              motorista: {
+                id: motorista._id,
+                nome: motorista.nome,
+                cnh: motorista.cnh,
+                matricula: motorista.matricula,
+              },
+
+              prefixo: item.prefixo,
+              kmEntrada: item.kmEntrada,
+              kmSaida: item.kmSaida,
+
+              hPerSaida: item.hPerSaida,
+              hCarregamento: item.hCarregamento,
+              hFechamentoNF: item.hFechamentoNF,
+              hPerVolta: item.hPerVolta,
+              hDescarregamento: item.hDescarregamento,
+              hFechamentoTicket: item.hFechamentoTicket,
+            })
+            
+            await clearServicesLocal()
+        });
+    },
     async save() {
-      await saveLocalDb({
-        hrEmitido: new Date().toLocaleTimeString('pt-br'),
-        dtEmitido: new Date().toLocaleDateString('pt-br'),
 
-        nome: Motorista.nome,
-        cnh: Motorista.cnh,
-        matricula: Motorista.matricula,
-        dataRegistro: Motorista.dataRegistro,
+      if(navigator.onLine){
+        const response = await Api.post(`/controlKM`, {
+              hrEmitido: new Date().toLocaleTimeString('pt-br'),
+              dtEmitido: new Date().toLocaleDateString('pt-br'),
 
-        prefixo: this.prefixo,
-        kmEntrada: this.kmEntrada,
-        kmSaida: this.kmSaida,
+              motorista: {
+                id: motorista.id,
+                nome: motorista.nome,
+                cnh: motorista.cnh,
+                matricula: motorista.matricula,
+              },
 
-        hPerSaida: this.hPerSaida,
-        hCarregamento: this.hCarregamento,
-        hFechamentoNF: this.hFechamentoNF,
-        hPerVolta: this.hPerVolta,
-        hDescarregamento: this.hDescarregamento,
-        hFechamentoTicket: this.hFechamentoTicket,
-      });
-      this.clearDataLocal()
-      this.wiewMessagem('Enviado com sucesso!!!')
+              prefixo: this.prefixo,
+              kmEntrada: this.kmEntrada,
+              kmSaida: this.kmSaida,
+
+              hPerSaida: this.hPerSaida,
+              hCarregamento: this.hCarregamento,
+              hFechamentoNF: this.hFechamentoNF,
+              hPerVolta: this.hPerVolta,
+              hDescarregamento: this.hDescarregamento,
+              hFechamentoTicket: this.hFechamentoTicket,
+        })
+        this.wiewMessagem('Enviado com sucesso!!!')
+        this.clearDataLocal()
+      } else {
+        console.log('offline')
+        await saveLocalDb({
+          hrEmitido: new Date().toLocaleTimeString('pt-br'),
+          dtEmitido: new Date().toLocaleDateString('pt-br'),
+
+          id: motorista.id,
+          nome: motorista.nome,
+          cnh: motorista.cnh,
+          matricula: motorista.matricula,
+          dataRegistro: motorista.dataRegistro,
+
+          prefixo: this.prefixo,
+          kmEntrada: this.kmEntrada,
+          kmSaida: this.kmSaida,
+
+          hPerSaida: this.hPerSaida,
+          hCarregamento: this.hCarregamento,
+          hFechamentoNF: this.hFechamentoNF,
+          hPerVolta: this.hPerVolta,
+          hDescarregamento: this.hDescarregamento,
+          hFechamentoTicket: this.hFechamentoTicket,
+        });
+
+        this.clearDataLocal()
+        this.wiewMessagem('Enviado com sucesso!!!')
+      }
     },
     wiewMessagem(message){
       this.mensagemSucesso = message
@@ -281,10 +350,13 @@ export default {
   --bg-placeholder: #577ea6;
   --font-primary: #f2f5f8;
 
+
+  background: #0b1015;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100%;
 }
 
 hr {

@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="lista-content">
-              <table class="table">
+      <table class="table">
         <thead>
           <tr>
             <th>Nome</th>
@@ -23,7 +23,10 @@
             <th>Permição</th>
             <th>
               <button class="btn">
-                <font-awesome-icon @click="showAddUser()" icon="plus"></font-awesome-icon>
+                <font-awesome-icon
+                  @click="showAddUser()"
+                  icon="plus"
+                ></font-awesome-icon>
               </button>
             </th>
           </tr>
@@ -35,7 +38,9 @@
             <td>{{ item.vencimentoCnh }}</td>
             <td>{{ item.matricula }}</td>
             <td>{{ item.email }}</td>
-            <td>{{ item.roles[0] === 'admin' ? 'Adiministrador' : 'Usuário'}}</td>
+            <td>
+              {{ item.roles[0] === "admin" ? "Adiministrador" : "Usuário" }}
+            </td>
             <td>
               <button @click="setUserAsUpdate(item)" class="btn">
                 <font-awesome-icon icon="edit"></font-awesome-icon>
@@ -51,35 +56,50 @@
         <h1>Editar usuário</h1>
         <div>
           <span>{{ userEdit._id }}</span>
-          <font-awesome-icon @click="closeModal()" icon="times"></font-awesome-icon>
+          <font-awesome-icon
+            @click="closeModal()"
+            icon="times"
+          ></font-awesome-icon>
         </div>
       </div>
       <div class="modal-form">
-          <label for="nome">Nome</label>
-          <input v-model="nome" id="nome" type="text" placeholder="Nome">
-          <label  for="cnh">CNH</label>
-          <input v-model="cnh" id="cnh" type="text" placeholder="CNH">
-          <label for="vencimentoCnh">Vencimento CNH</label>
-          <input v-model="vencimentoCnh" id="vencimentoCnh" type="text" placeholder="Vencimento CNH">
-          <label for="matricula">Matrícula</label>
-          <input v-model="matricula" id="matricula" type="text" placeholder="Matrícula">
-          <label for="email">E-mail</label>
-          <input v-model="email" id="email" type="email" placeholder="email">
-          <label for="roles">Permição</label>
-          <select v-model="roles" name="roles" id="roles">
-            <option value="user">Usuário</option>
-            <option value="admin">Adiministrador</option>
-          </select>
+        <label for="nome">Nome</label>
+        <input v-model="nome" id="nome" type="text" placeholder="Nome" />
+        <label for="cnh">CNH</label>
+        <input v-model="cnh" id="cnh" type="text" placeholder="CNH" />
+        <label for="vencimentoCnh">Vencimento CNH</label>
+        <input
+          v-model="vencimentoCnh"
+          id="vencimentoCnh"
+          type="text"
+          placeholder="Vencimento CNH"
+        />
+        <label for="matricula">Matrícula</label>
+        <input
+          v-model="matricula"
+          id="matricula"
+          type="text"
+          placeholder="Matrícula"
+        />
+        <label for="email">E-mail</label>
+        <input v-model="email" id="email" type="email" placeholder="email" />
+        <label for="roles">Permição</label>
+        <select v-model="roles" name="roles" id="roles">
+          <option value="user">Usuário</option>
+          <option value="admin">Adiministrador</option>
+        </select>
       </div>
       <div class="modal-buttons">
-      <button @click="deleteUser(userEdit._id)" class="bg-danger">Deletar</button>
+        <button @click="deleteUser(userEdit._id)" class="bg-danger">
+          Deletar
+        </button>
         <div class="info-create-at">
           Usuário criado no {{ createDateAt }} Ás {{ createTimeAt }}
         </div>
-      <button @click="updateUser(userEdit._id)">Atualizar</button>
+        <button @click="updateUser(userEdit._id)">Atualizar</button>
       </div>
     </div>
-    
+
     <!-- Modal Add -->
 
     <div v-if="showModalAdd" class="modal">
@@ -87,43 +107,60 @@
         <h1>Criar novo usuário</h1>
         <div>
           <span>{{ userEdit._id }}</span>
-          <font-awesome-icon @click="closeModalAdd()" icon="times"></font-awesome-icon>
+          <font-awesome-icon
+            @click="closeModalAdd()"
+            icon="times"
+          ></font-awesome-icon>
         </div>
       </div>
       <div class="modal-form">
-          <label for="nome">Nome</label>
-          <input v-model="nome" id="nome" type="text" placeholder="Nome">
-          <label  for="cnh">CNH</label>
-          <input v-model="cnh" id="cnh" type="text" placeholder="CNH">
-          <label for="vencimentoCnh">Vencimento CNH</label>
-          <input v-model="vencimentoCnh" id="vencimentoCnh" type="text" placeholder="Vencimento CNH">
-          <label for="matricula">Matrícula</label>
-          <input v-model="matricula" id="matricula" type="text" placeholder="Matrícula">
-          <label for="email">E-mail</label>
-          <input v-model="email" id="email" type="email" placeholder="email">
-          <label for="password">Senha</label>
-          <input v-model="password" id="password" type="password" placeholder="Senha">
-          <label for="roles">Permição</label>
-          <select v-model="roles" name="roles" id="roles">
-            <option value="user">Usuário</option>
-            <option value="admin">Adiministrador</option>
-          </select>
+        <label for="nome">Nome</label>
+        <input v-model="nome" id="nome" type="text" placeholder="Nome" />
+        <label for="cnh">CNH</label>
+        <input v-model="cnh" id="cnh" type="text" placeholder="CNH" />
+        <label for="vencimentoCnh">Vencimento CNH</label>
+        <input
+          v-model="vencimentoCnh"
+          id="vencimentoCnh"
+          type="text"
+          placeholder="Vencimento CNH"
+        />
+        <label for="matricula">Matrícula</label>
+        <input
+          v-model="matricula"
+          id="matricula"
+          type="text"
+          placeholder="Matrícula"
+        />
+        <label for="email">E-mail</label>
+        <input v-model="email" id="email" type="email" placeholder="email" />
+        <label for="password">Senha</label>
+        <input
+          v-model="password"
+          id="password"
+          type="password"
+          placeholder="Senha"
+        />
+        <label for="roles">Permição</label>
+        <select v-model="roles" name="roles" id="roles">
+          <option value="user">Usuário</option>
+          <option value="admin">Adiministrador</option>
+        </select>
       </div>
-      
+
       <div class="modal-buttons">
         <button @click="registerUser()">Criar usuário</button>
         {{ roles }}
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
-import Api from '../../js/api'
+import Api from "../../js/api";
 
 export default {
-  data(){
+  data() {
     return {
       list: [],
       userEdit: {},
@@ -131,108 +168,113 @@ export default {
       showModal: false,
       showModalAdd: false,
 
-      nome: '',
-      cnh: '',
-      vencimentoCnh: '',
-      matricula: '',
-      email: '',
-      roles: 'user',
-      createDateAt: '',
-      createTimeAt: '',
+      nome: "",
+      cnh: "",
+      vencimentoCnh: "",
+      matricula: "",
+      email: "",
+      roles: "user",
+      createDateAt: "",
+      createTimeAt: "",
 
-      password: '',
-    }
+      password: "",
+    };
   },
   async created() {
-    this.list = await this.getAllUsers()
+    this.list = await this.getAllUsers();
   },
   methods: {
-    async getAllUsers(){
-      const response = await Api.get('/users')
-      //console.log(response.data.users)
-      return response.data.users
+    async getAllUsers() {
+      const token = localStorage.getItem("token");
+      const response = await Api.get("/users", {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data.users.reverse();
     },
-    async deleteUser(id){
-      const response = await Api.delete(`/user/delete/${id}`)
+    async deleteUser(id) {
+      const response = await Api.delete(`/user/delete/${id}`);
       //console.log(response.data.message)
-      this.list = await this.getAllUsers()
-      this.closeModal()
-      return 
+      this.list = await this.getAllUsers();
+      this.closeModal();
+      return;
     },
-    async registerUser(){
-      let arr = new Array(this.roles)
+    async registerUser() {
+      let arr = new Array(this.roles);
       const response = await Api.post(`/user/register`, {
-         nome: this.nome,
-         cnh: this.cnh,
-         vencimentoCnh: this.vencimentoCnh,
-         matricula: this.matricula,
-         email: this.email,
-         password: this.password,
-         createDateAt: new Date().toLocaleDateString('pt-br'),
-         createTimeAt: new Date().toLocaleTimeString('pt-br'),
-			   roles: arr
-      })
-      this.closeModalAdd()
-      this.list = await this.getAllUsers()
+        nome: this.nome,
+        cnh: this.cnh,
+        vencimentoCnh: this.vencimentoCnh,
+        matricula: this.matricula,
+        email: this.email,
+        password: this.password,
+        createDateAt: new Date().toLocaleDateString("pt-br"),
+        createTimeAt: new Date().toLocaleTimeString("pt-br"),
+        roles: arr,
+      });
+      this.closeModalAdd();
+      this.list = await this.getAllUsers();
     },
-    async updateUser(id){
-      let arr = new Array(this.roles)
+    async updateUser(id) {
+      let arr = new Array(this.roles);
       const response = await Api.put(`/user/update/${id}`, {
-         nome: this.nome,
-         cnh: this.cnh,
-         vencimentoCnh: this.vencimentoCnh,
-         matricula: this.matricula,
-         email: this.email,
-			   roles: arr
-      })
-      this.closeModal()
-      this.list = await this.getAllUsers()
+        nome: this.nome,
+        cnh: this.cnh,
+        vencimentoCnh: this.vencimentoCnh,
+        matricula: this.matricula,
+        email: this.email,
+        roles: arr,
+      });
+      this.closeModal();
+      this.list = await this.getAllUsers();
     },
     setUserAsUpdate(item) {
-      this.showModal = true
-      this.userEdit = item
+      this.showModal = true;
+      this.userEdit = item;
 
-      this.nome = this.userEdit.nome
-      this.cnh = this.userEdit.cnh
-      this.vencimentoCnh = this.userEdit.vencimentoCnh
-      this.matricula = this.userEdit.matricula
-      this.email = this.userEdit.email
-      this.roles = this.userEdit.roles[0]
-      this.createDateAt = this.userEdit.createDateAt
-      this.createTimeAt = this.userEdit.createTimeAt
+      this.nome = this.userEdit.nome;
+      this.cnh = this.userEdit.cnh;
+      this.vencimentoCnh = this.userEdit.vencimentoCnh;
+      this.matricula = this.userEdit.matricula;
+      this.email = this.userEdit.email;
+      this.roles = this.userEdit.roles[0];
+      this.createDateAt = this.userEdit.createDateAt;
+      this.createTimeAt = this.userEdit.createTimeAt;
     },
-    closeModal(){
-      this.showModal = false
+    closeModal() {
+      this.showModal = false;
 
-      this.userEdit = {}
+      this.userEdit = {};
 
-      this.nome = ''
-      this.cnh = ''
-      this.vencimentoCnh = ''
-      this.matricula = ''
-      this.email = ''
-      this.roles = ''
-      this.createDateAt = ''
-      this.createTimeAt = ''
+      this.nome = "";
+      this.cnh = "";
+      this.vencimentoCnh = "";
+      this.matricula = "";
+      this.email = "";
+      this.roles = "";
+      this.createDateAt = "";
+      this.createTimeAt = "";
     },
-    showAddUser(){
-      this.showModalAdd = true
+    showAddUser() {
+      this.showModalAdd = true;
     },
-    closeModalAdd(){
-      this.showModalAdd = false
+    closeModalAdd() {
+      this.showModalAdd = false;
 
-      this.nome = ''
-      this.cnh = ''
-      this.vencimentoCnh = ''
-      this.matricula = ''
-      this.email = ''
-      this.roles = 'user'
-      this.createDateAt = ''
-      this.createTimeAt = ''
-      this.password = ''
-    }
-  }
-}
+      this.nome = "";
+      this.cnh = "";
+      this.vencimentoCnh = "";
+      this.matricula = "";
+      this.email = "";
+      this.roles = "user";
+      this.createDateAt = "";
+      this.createTimeAt = "";
+      this.password = "";
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -241,7 +283,7 @@ export default {
   --bg-primary: #0b1015;
   --bg-light: #17212b;
   --bg-placeholder: #577ea6;
-  --bg-danger:#b12621;
+  --bg-danger: #b12621;
   --font-primary: #f2f5f8;
 
   display: flex;
@@ -265,29 +307,44 @@ export default {
   padding: 10px 20px;
 }
 
-.modal>.header-model {
+.modal > .header-model {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: solid 1px var(--bg-placeholder) ;
+  border-bottom: solid 1px var(--bg-placeholder);
+  background: var(--bg-light);
 }
 
-.modal>.header-model>div>span {
+.modal > .header-model > h1 {
+  background: var(--bg-light);
+}
+
+.modal > .header-model > div > span {
+  background: var(--bg-light);
   color: var(--bg-placeholder);
   margin-right: 30px;
 }
 
-.modal>.header-model>div>svg:hover {
+.modal > .header-model > div , svg {
+  background: var(--bg-light);
+}
+
+.modal > .header-model > div > svg:hover {
   transform: scale(1.2);
 }
 
-.modal>.modal-form {
+.modal > .modal-form {
   display: flex;
   flex-direction: column;
   padding: 10px 40px;
+  background: var(--bg-light);
 }
 
-.modal>.modal-form>input {
+.modal > .modal-form > label {
+  background: var(--bg-light);
+}
+
+.modal > .modal-form > input {
   background: var(--font-primary);
   height: 35px;
   border: solid 1px var(--bg-primary);
@@ -296,13 +353,13 @@ export default {
   color: var(--bg-primary);
   margin: 5px 0px;
 }
-.modal>.modal-form>input:hover {
+.modal > .modal-form > input:hover {
   transition: opacity ease 0.5s;
   background: var(--font-primary);
   opacity: 0.8;
 }
 
-.modal>.modal-form>select {
+.modal > .modal-form > select {
   position: relative;
   background: var(--font-primary);
   height: 35px;
@@ -313,11 +370,12 @@ export default {
   margin: 5px 0px;
 }
 
-.modal>.modal-form>select>option {
-   color: var(--bg-primary);
+.modal > .modal-form > select > option {
+  color: var(--bg-primary);
 }
 
-.modal>.modal-buttons {
+.modal > .modal-buttons {
+  background: var(--bg-light);
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -328,7 +386,7 @@ export default {
   background: var(--bg-danger) !important;
 }
 
-.modal>.modal-buttons>button {
+.modal > .modal-buttons > button {
   background: var(--bg-placeholder);
   height: 35px;
   border: solid 1px var(--bg-primary);
@@ -337,7 +395,7 @@ export default {
   font-weight: 500;
 }
 
-.modal>.modal-buttons>button:hover {
+.modal > .modal-buttons > button:hover {
   transition: background-color ease 0.4s;
   transition: opacity ease 0.4s;
   background: var(--bg-placeholder);
@@ -349,6 +407,7 @@ export default {
   font-size: 12px;
   align-items: center;
   color: var(--bg-placeholder);
+  background: var(--bg-light);
 }
 
 .header-lista {
@@ -381,7 +440,7 @@ export default {
   border: solid 1px var(--bg-primary);
   border-radius: 5px 0px 0px 5px;
   padding: 0px 15px;
-  color: var(--bg-primary)
+  color: var(--bg-primary);
 }
 .pesquisa > button {
   background: var(--bg-placeholder);
@@ -391,8 +450,8 @@ export default {
   padding: 0px 15px;
 }
 .pesquisa > button:hover {
-    background: var(--bg-placeholder);
-    opacity: 0.8;
+  background: var(--bg-placeholder);
+  opacity: 0.8;
 }
 
 .pesquisa > button > svg {
@@ -470,7 +529,7 @@ export default {
   background: var(--bg-placeholder);
   opacity: 0.8;
 }
-.btn>svg {
+.btn > svg {
   background: var(--bg-placeholder);
 }
 </style>
